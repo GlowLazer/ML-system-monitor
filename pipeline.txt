@@ -1,0 +1,30 @@
+ml-monitor/
+│  (1.CPU ,2.Memory,3.Disk ,4.GPU)
+├── collector/
+│   ├── cpu.py  get the data from the /proc/stat
+│   ├── memory.py  get the data from the /proc/meminfo
+│   ├── gpu.py get the data from the nvidia.smi4
+|   |---- disk usage -> df -hk 
+│   └── main.py
+│
+├── db/
+│   └── influx_sender.py
+│
+├── config/
+│   └── config.py
+│
+└── service/
+    └── ml-monitor.service
+
+$$ main pipeline $$
+
+[ System Metrics ]
+   ↓
+[ Python Collector ]
+   ↓
+[ InfluxDB ]
+   ↓
+[ Grafana Dashboard ]
+   ↓
+[ Alerts ]
+
