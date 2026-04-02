@@ -1,0 +1,7 @@
+influxdb-client>=1.36.0
+psutil>=5.9.5
+numpy>=1.26.0
+pandas>=2.1.0
+scikit-learn>=1.3.0
+joblib>=1.3.2
+python-dotenv>=1.0.0

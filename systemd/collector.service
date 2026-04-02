@@ -1,0 +1,17 @@
+[Unit]
+Description=ML Infrastructure Metrics Collector
+After=network.target docker.service
+
+[Service]
+Type=simple
+User=mlmonitor
+EnvironmentFile=/opt/ml-infra-monitor/.env
+WorkingDirectory=/opt/ml-infra-monitor/python_collector
+ExecStart=/usr/bin/python3 /opt/ml-infra-monitor/python_collector/main_loop.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
