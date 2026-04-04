@@ -1,4 +1,4 @@
-from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 import config
@@ -111,17 +111,6 @@ def send_network(iface: str, bytes_in_per_sec: float, bytes_out_per_sec: float, 
         .field("bytes_in_per_sec",  bytes_in_per_sec)
         .field("bytes_out_per_sec", bytes_out_per_sec)
         .field("anomaly", anomaly)
-    )
-    _write(p)
-
-
-# ML model anomaly is written as its own measurement so it can be shown separately in grafana
-# alongside the rule-based anomaly fields that live inside cpu_usage, memory, etc.
-def send_ml_anomaly(is_anomaly: bool):
-    p = (
-        Point("ml_anomaly")
-        .tag("host", config.HOST_TAG)
-        .field("is_anomaly", is_anomaly)
     )
     _write(p)
 
